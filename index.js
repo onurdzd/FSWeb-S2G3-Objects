@@ -15,8 +15,11 @@ const serpmeKahvalti = {isim: "Serpme Kahvaltı", fiyat: 16, kategori:"Kahvaltı
 */
 
 
-function MenuElemaniOlustur(/*Kodlar buraya*/){
-	/*Kodlar buraya*/
+function MenuElemaniOlustur(a,b,c){
+	return {
+		isim: a, 
+		fiyat: b, 
+		kategori: c}
 }
 
 
@@ -47,11 +50,17 @@ function MenuElemaniOlustur(/*Kodlar buraya*/){
 
 
 const burger = {
-	isim: "Burger", 
-	fiyat: 18, 
-	kategori: "Öğle Yemeği", 
-
-}
+  isim: "Burger",
+  fiyat: 18,
+  kategori: "Öğle Yemeği",
+  indirim: function (a) {
+    if (a == "öğretmen" || a == "öğrenci") {
+      return this.fiyat * 0.75;
+    } else {
+      return this.fiyat * 0.9;
+    }
+  },
+};
 
 
 
@@ -71,14 +80,15 @@ const degerlendirmeler = [
 	Yukarıdaki degerlendirmeler dizisini(array) kullanarak:
 	1. Sadece Ahmet'in geribildirimini konsolda görüntüleyin - fonksiyona gerek yok
 */
-
+	console.log(degerlendirmeler[6].geribildirim)
 
 
 /*  Görev 4 (ototest yok):  
 	Reyna'nın geribildirimi girilmemiş! Aşağıdakileri uygulayın: (fonksiyona gerek yok) 
 	1. Bu geribildirimi Reyna'nın değerlendirmesine ekleyin - "bu mekan bir harika dostum, yine de garsonun gülümsememesinden puan kırdım"
 	2. degerlendirmeler dizisini konsolda görüntüleyerek çalışmanızı kontrol edin
-*/
+*/degerlendirmeler[7].geribildirim="bu mekan bir harika dostum, yine de garsonun gülümsememesinden puan kırdım"
+console.log(degerlendirmeler[7].geribildirim)
 
 
 
@@ -94,9 +104,14 @@ const degerlendirmeler = [
 */
 
 
-function DegerledirmeEkle(/*Kodlar buraya */){
-	/*Kodlar buraya */
-	
+function DegerledirmeEkle(degerlendirmeler,isim,puan,geribildirim){
+	let yeni={
+		isim:isim,
+		puan:puan,
+		geribildirim:geribildirim,
+	}
+	degerlendirmeler.push(yeni)
+	return degerlendirmeler
 }
 
 
@@ -112,9 +127,13 @@ function DegerledirmeEkle(/*Kodlar buraya */){
 */
 
 
-function AnahtardanDegerlendirmeAl(/*Kodlar buraya*/) {
-	/*Kodlar buraya*/
+function AnahtardanDegerlendirmeAl(dizi,key) {
+	
+	let isim=dizi[key].isim;
+	let puan=dizi[key].puan;
+	let geribildirim=dizi[key].geribildirim;
 
+	return `${isim} isimli kişi ${puan} puan verdi ve şunları yazdı: ${geribildirim}`
 }
 
 
@@ -132,9 +151,16 @@ function AnahtardanDegerlendirmeAl(/*Kodlar buraya*/) {
 */
 
 
-function SonDegerlendirmeyiAl(/*Kodlar buraya*/) {
-	/*Kodlar buraya*/
+function SonDegerlendirmeyiAl(dizi) {
+	
+	let isim=dizi[dizi.length-1].isim;
+	let puan=dizi[dizi.length-1].puan;
+	let geribildirim=dizi[dizi.length-1].geribildirim;
+
+	return `${isim} isimli kişi ${puan} puan verdi ve şunları yazdı: ${geribildirim}`
 } 
+
+console.log(SonDegerlendirmeyiAl(degerlendirmeler))
 
 
 
@@ -154,8 +180,14 @@ function SonDegerlendirmeyiAl(/*Kodlar buraya*/) {
 	]
 */
 
-function PuanaGoreDegerlendirmeAl(/* Kodlar buraya */) {
-    /* Kodlar buraya */
+function PuanaGoreDegerlendirmeAl(dizi,puan) {
+    let sonuc=[];
+	dizi.forEach(item => {
+		if(Math.floor(item.puan) === puan){
+		sonuc.push(item)
+	}
+	})
+	return sonuc
 }
 
 
@@ -166,8 +198,14 @@ function PuanaGoreDegerlendirmeAl(/* Kodlar buraya */) {
 	
 */
 
-function UzunDegerlendirmeleriAl(/* Kodlar buraya */) {
-    /* Kodlar buraya */
+function UzunDegerlendirmeleriAl(dizi) {
+    let sonuc=[];
+
+	dizi.forEach(item=>{
+		if(item.geribildirim.split(" ").length>15){
+			sonuc.push(item)
+		}})
+		return sonuc
 }
 
 
@@ -188,12 +226,12 @@ function UzunDegerlendirmeleriAl(/* Kodlar buraya */) {
 	Bu 110 döndürmelidir çünkü başlangıç kilometre sayacını 10 olarak tanımladık ve 100 km arabayı sürdük.
 */
 
-
-function arabaYapici(/* Kodlar buraya */) {
-    /* Kodlar buraya */
-    
+let araba1={
+	km:10,
+	surus:function arabaYapici(sayac) {
+    return sayac+this.km
 }
-
+}
 
 /*  Buradan aşağıdaki kodları değiştirmeyin lütfen */
 function sa(){
